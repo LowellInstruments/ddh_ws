@@ -1,3 +1,3 @@
-module github.com/lowellinstruments/ws_ddh
+module github.com/lowellinstruments/ddh_ws
 
 go 1.17
