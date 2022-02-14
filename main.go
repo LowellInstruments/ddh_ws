@@ -41,18 +41,15 @@ func filesFolderHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// add folder pre-path
+	// add folder pre-path and extension, if so
 	f = VESSEL_FILES_PATH + f
-	if !strings.HasSuffix(f, ".zip") {
-		f += ".zip"
-	}
 
 	// check
 	_, e := os.Stat(f)
-	if e == nil {
+	if e == nil && strings.HasSuffix(f, ".zip") {
 		http.ServeFile(w, r, f)
 	} else {
-		w.Write([]byte("<h1>nope file</h1>"))
+		w.Write([]byte("only files ending in zip"))
 	}
 }
 
