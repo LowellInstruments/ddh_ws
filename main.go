@@ -34,7 +34,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func filesFolderHandler(w http.ResponseWriter, r *http.Request) {
-	// curl --request GET http://localhost:8080/files/get?ddh=mary --output saved.zip
+	// curl --request GET http://localhost:2341/files/get?ddh=mary --output saved.zip
 	f := r.URL.Query().Get("ddh")
 	if f == "" {
 		http.Error(w, "parameter missing", http.StatusBadRequest)
@@ -60,5 +60,5 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", indexHandler)
 	mux.HandleFunc("/files/get", filesFolderHandler)
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	log.Fatal(http.ListenAndServe(":2341", mux))
 }
