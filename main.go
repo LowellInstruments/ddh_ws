@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"fmt"
 )
 
 var VESSEL_FILES_PATH = "files/"
@@ -50,12 +51,19 @@ func filesFolderHandler(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, f)
 	} else {
 		w.Write([]byte("only files ending in zip"))
+		fmt.Println(f)
 	}
 }
 
 func main() {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", indexHandler)
+        os.Chdir("/home/ubuntu/ddh_ws")
+        mux := http.NewServeMux()
+        mux.HandleFunc("/", indexHandler)
 	mux.HandleFunc("/files/get", filesFolderHandler)
 	log.Fatal(http.ListenAndServe(":2341", mux))
+
+        // d, _ := os.Getwd()
+        // f, _ := os.Create("/tmp/dat2")
+	// defer f.Close()
+	// f.WriteString(d)
 }
